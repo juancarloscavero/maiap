@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+group = 'cucumber'
+version = '0.0.1'
+description = 'MAIAP'
+
+// Java version
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+dependencies {
+    compile group: 'io.appium', name: 'java-client', version:'3.0.0'
+    testCompile group: 'info.cukes', name: 'cucumber-java', version:'1.2.0'
+    testCompile group: 'info.cukes', name: 'cucumber-junit', version:'1.2.0'
+    testCompile group: 'junit', name: 'junit', version:'4.11'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:'2.46.0'
+}
+
+task workshopTest (type: Test) {
+  systemProperties 'device': 'android',
+                   'appium.url': 'http://127.0.0.1:4723/wd/hub',
+                   'app': 'Workshop.apk'
+
+  dependsOn cleanTest
+}
